@@ -286,6 +286,7 @@ fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier) {
     }
 
     // Zone cliquable de disponibilité (action + accessibilité)
+    // Zone cliquable de disponibilité, adaptée au thème clair et sombre
     @Composable
     fun InteractionAvailability(
         availability: String,
@@ -293,7 +294,9 @@ fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier) {
         modifier: Modifier = Modifier
     ) {
         Surface(
-            color = Color.LightGray,
+            color = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+            shape = MaterialTheme.shapes.medium,
             modifier = modifier
                 .fillMaxWidth()
                 .clickable(
@@ -306,6 +309,7 @@ fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = availability,
+                style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier.padding(12.dp)
             )
         }
