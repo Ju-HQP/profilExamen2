@@ -17,11 +17,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -69,6 +71,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
             onAvailabilityClick = {
                 // pas de fonctionnement
             },
+            graduate = "ESGI",
             // padding externe : le parent place la carte dans l'écran
             modifier = modifier
                 .fillMaxWidth()
@@ -86,6 +89,7 @@ fun ProfileCard(
     skills: List<String>,
     availability: String,
     onAvailabilityClick: () -> Unit, // vide pour l'instant
+    graduate: String,
     modifier: Modifier = Modifier
 ) {
     Surface(modifier = modifier) {
@@ -96,8 +100,9 @@ fun ProfileCard(
             ProfileHeader(
                 name = name,
                 role = role,
-                modifier = Modifier.padding(bottom = 8.dp),
+                graduate = graduate,
             )
+            Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = "Description",
                 style = MaterialTheme.typography.titleMedium,
@@ -108,9 +113,10 @@ fun ProfileCard(
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = MaterialTheme.typography.bodyMedium
             )
+            Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = "Compétences :",
-                modifier = Modifier.padding(bottom = 4.dp)
+                text = "Compétences",
+                style = MaterialTheme.typography.titleMedium,
             )
             skills.forEach { skill ->
                 SkillItem(skill = skill)
@@ -129,36 +135,61 @@ fun ProfileCard(
 fun ProfileHeader(
     name: String,
     role: String,
+    graduate: String,
     modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier.fillMaxWidth(),
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.large,
+        tonalElevation = 2.dp
     ) {
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            shape = MaterialTheme.shapes.large,
-            tonalElevation = 2.dp,
+        Box(
+            modifier = modifier.fillMaxWidth().padding(10.dp)
         ) {
-            Column(modifier = Modifier.padding(8.dp,16.dp)) {
-                Text(text = name,
-                    style = MaterialTheme.typography.bodyMedium
+            Row(
+                modifier = modifier.fillMaxWidth().align(Alignment.BottomCenter)
+                , verticalAlignment = Alignment.CenterVertically
+            ) {
+                ProfileImage(
+                    profileTitle = name
+                )
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
+            Surface(
+                modifier = Modifier
+                    .align(Alignment.TopEnd),
+                shape = MaterialTheme.shapes.small,
+                tonalElevation = 6.dp
+            ) {
+                Text(
+                    text = graduate,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                    style = MaterialTheme.typography.labelMedium
                 )
             }
         }
-        Surface(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(8.dp),
-            shape = MaterialTheme.shapes.small,
-            tonalElevation = 6.dp
-        ) {
-            Text(
-                text = role,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                style = MaterialTheme.typography.labelSmall
-            )
-        }
     }
+
+    Text(
+        text = role,
+        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+        style = MaterialTheme.typography.labelMedium
+    )
+}
+
+@Composable
+fun ProfileImage(
+    profileTitle: String,
+    modifier: Modifier = Modifier
+) {
+    androidx.compose.foundation.Image(
+        painter = painterResource(id = android.R.drawable.ic_input_add),
+        contentDescription = "Image de profil de $profileTitle",
+        modifier = modifier
+    )
 }
 
 // Une compétence
@@ -212,6 +243,7 @@ fun ProfileJuniorPreview() {
             skills = listOf("Kotlin", "Android Studio", "Java/Spring"),
             availability = "Disponible pour un stage",
             onAvailabilityClick = {},
+            graduate = "INSA",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(24.dp)
@@ -241,6 +273,7 @@ fun ProfileFullStackPreview() {
             ),
             availability = "Disponible dès maintenant",
             onAvailabilityClick = {},
+            graduate = "ESGI",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(24.dp)
