@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.expandHorizontally
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,10 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
@@ -118,9 +126,9 @@ fun ProfileCard(
                 text = "Compétences",
                 style = MaterialTheme.typography.titleMedium,
             )
-            skills.forEach { skill ->
-                SkillItem(skill = skill)
-            }
+            Spacer(modifier = Modifier.height(12.dp))
+            SkillsColumn(skills = skills, modifier = Modifier.padding(start = 4.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             InteractionAvailability(
                 availability = availability,
                 onClick = onAvailabilityClick,
@@ -176,7 +184,7 @@ fun ProfileHeader(
     Text(
         text = role,
         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-        style = MaterialTheme.typography.labelMedium
+        style = MaterialTheme.typography.labelLarge
     )
 }
 
@@ -191,7 +199,23 @@ fun ProfileImage(
         modifier = modifier
     )
 }
+@Composable
+fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier){
+    LazyColumn(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(skills) { skill ->
+            SkillItem(skill = skill)
+        }
+    }
+}
 
+/*
+* skills.forEach { skill ->
+                SkillItem(skill = skill)
+            }
+            *  */
 // Une compétence
 @Composable
 fun SkillItem(
@@ -231,7 +255,7 @@ fun InteractionAvailability(
     }
 }
 
-// preview fictifs
+// PREVIEWS ------------------
 @Preview(showBackground = true)
 @Composable
 fun ProfileJuniorPreview() {
