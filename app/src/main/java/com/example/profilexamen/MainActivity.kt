@@ -31,6 +31,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
@@ -155,18 +156,23 @@ fun ProfileHeader(
         tonalElevation = 2.dp
     ) {
         Box(
-            modifier = modifier.fillMaxWidth().padding(10.dp)
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(10.dp)
         ) {
             Row(
-                modifier = modifier.fillMaxWidth().align(Alignment.BottomCenter)
-                , verticalAlignment = Alignment.CenterVertically
+                modifier = modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 ProfileImage(
                     profileTitle = name
                 )
                 Text(
                     text = name,
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
             Surface(
@@ -187,7 +193,8 @@ fun ProfileHeader(
     Text(
         text = role,
         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-        style = MaterialTheme.typography.labelLarge
+        style = MaterialTheme.typography.titleMedium,
+        color = MaterialTheme.colorScheme.onSurface
     )
 }
 
@@ -202,8 +209,9 @@ fun ProfileImage(
         modifier = modifier
     )
 }
+
 @Composable
-fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier){
+fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier
             .background(MaterialTheme.colorScheme.background),
@@ -226,11 +234,20 @@ fun SkillItem(
     skill: String,
     modifier: Modifier = Modifier
 ) {
-    Card(modifier = modifier.fillMaxHeight()){
+    Card(
+        modifier = modifier.fillMaxHeight(), shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 2.dp
+        )
+    ) {
         // pour afficher la compété sous forme de liste en -
         Text(
             text = skill,
-            modifier = Modifier.padding(8.dp,4.dp),
+            modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+            style = MaterialTheme.typography.labelLarge
         )
     }
 }
@@ -289,7 +306,7 @@ fun ProfileFullStackPreview() {
             name = "Julien Hédreul",
             role = "Développeur Angular/React",
             description = "Étudiant en développement informatique à l'ESGI, je recherche une alternance de 2ans dans le dev web/applicatif. Auriez-vous des contacts ? Si mon profil vous intéresse, je serai heureux de pouvoir échanger avec vous ;)" +
-                    "Mail: hedrjul@gmail.com (tout est vrai)",
+                    "\nMail: hedrjul@gmail.com (tout est vrai)",
             skills = listOf(
                 "Angular",
                 "JavaScript",
