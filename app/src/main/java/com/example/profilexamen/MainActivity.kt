@@ -33,8 +33,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -126,12 +128,11 @@ fun ProfileCard(
                 style = MaterialTheme.typography.bodyMedium
             )
             Spacer(modifier = Modifier.height(12.dp))
-            Text(
-                text = "Compétences",
-                style = MaterialTheme.typography.titleMedium,
+            SkillsColumn(
+                skills = skills,
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.background,shape = MaterialTheme.shapes.small)
             )
-            Spacer(modifier = Modifier.height(12.dp))
-            SkillsColumn(skills = skills, modifier = Modifier.padding(start = 4.dp))
             Spacer(modifier = Modifier.height(12.dp))
             InteractionAvailability(
                 availability = availability,
@@ -212,13 +213,18 @@ fun ProfileImage(
 
 @Composable
 fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier) {
-    LazyColumn(
-        modifier = modifier
-            .background(MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        items(skills) { skill ->
-            SkillItem(skill = skill)
+    Column(modifier = modifier) {
+        Text(
+            text = "Compétences",
+            style = MaterialTheme.typography.titleMedium,
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(skills) { skill ->
+                SkillItem(skill = skill)
+            }
         }
     }
 }
