@@ -22,7 +22,47 @@ On peut cliquer sur la dispo du profil pour (plus tard) obtenir le mail et le nu
 - previews
 - accessibilité de base
 
-# Explication courte
+# Liste des composants Compose utilisés
+
+- Column
+- Row
+- LazyColumn
+- Box
+- Surface
+- Spacer
+- Icon
+- Image
+- Card
+- Text
+- Button
+- OutlineTextField
+
+# Layouts utilisés
+
+Row	
+Column
+Spacer
+Surface
+LazyColumn
+Box
+
+# Explications (Exam2)
+
+5. J'ai utilisé LazyColumn pour afficher verticalement la liste des compétences du profil.
+
+6. J'ai créer un thème clair et sombre, en gardant des couleurs sobres, avec la nuance du vert. Le vert change légèrement de nuance sur le thème sombre pour que ce soit plus agréable. J'ai également appliqué un fond à la liste de compétences.
+
+7.  Quelles notions du chapitre Compose UI avez-vous
+réutilisées dans cette application ? 
+- J'ai utilisé les composant fondamentaux de Compose comme Text, ou Icon.
+- J'ai exploité Material Design pour améliorer les couleurs et l'accessibilité de la page, avec les notions de thèmes, formes et typos.
+- J'ai utilisé les layouts mis à disposition pour aligner et organiser les éléments dans la page
+- J'ai utilisé une liste moderne (LazyColumn)
+
+
+
+
+# Explication courte (Exam1)
 
 1. J'ai crée les composables ProfileScreen (écran principal)
  ProfileCard (fiche profil) contenant les infos des composants :

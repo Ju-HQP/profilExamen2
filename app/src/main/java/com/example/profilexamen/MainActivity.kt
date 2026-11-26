@@ -22,10 +22,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -37,6 +39,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.profilexamen.ui.theme.ProfilExamenTheme
@@ -286,31 +289,28 @@ fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier) {
     }
 
     // Zone cliquable de disponibilité (action + accessibilité)
-    // Zone cliquable de disponibilité, adaptée au thème clair et sombre
     @Composable
     fun InteractionAvailability(
         availability: String,
         onClick: () -> Unit,
         modifier: Modifier = Modifier
     ) {
-        Surface(
-            color = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
+        OutlinedTextField(
+            value = availability,
+            onValueChange = {},
+            readOnly = true,
+            label = {
+                Text(text = "Disponibilité", style= MaterialTheme.typography.labelSmall)
+            },
+        )
+        Button(
+            onClick = onClick,
             shape = MaterialTheme.shapes.medium,
-            modifier = modifier
-                .fillMaxWidth()
-                .clickable(
-                    role = Role.Button,
-                    onClick = onClick
-                )
-                .semantics {
-                    contentDescription = "Contacter : téléphone"
-                }
+            modifier = modifier.fillMaxWidth()
         ) {
             Text(
-                text = availability,
-                style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier.padding(12.dp)
+                text = "Télécharger le CV",
+                style = MaterialTheme.typography.labelLarge
             )
         }
     }
