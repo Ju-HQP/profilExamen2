@@ -333,3 +333,38 @@ fun ProfileFullStackPreview() {
         )
     }
 }
+
+    // Dark mode PREVIEW
+
+    @Preview(
+        showBackground = true,
+        name = "Catalogue - Dark Theme"
+    )
+    @Composable
+    fun ProfilePageDarkPreview() {
+        ProfilExamenTheme(darkTheme = true) {
+            ProfileCard(
+                name = "Julien Hédreul",
+                role = "Développeur Angular/React",
+                description = "Étudiant en développement informatique à l'ESGI, je recherche une alternance de 2ans dans le dev web/applicatif. Auriez-vous des contacts ? Si mon profil vous intéresse, je serai heureux de pouvoir échanger avec vous ;)" +
+                        "\nMail: hedrjul@gmail.com (tout est vrai)",
+                skills = listOf(
+                    "Angular",
+                    "JavaScript",
+                    "React",
+                    "MongoDB",
+                    "Symfony",
+                    "SQL",
+                    "Git",
+                    "PHP",
+                    "Docker"
+                ),
+                availability = "Disponible dès maintenant",
+                onAvailabilityClick = {},
+                graduate = "ESGI",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp)
+            )
+        }
+    }
