@@ -24,10 +24,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
@@ -222,11 +224,13 @@ fun SkillItem(
     skill: String,
     modifier: Modifier = Modifier
 ) {
-    // pour afficher la compété sous forme de liste en -
-    Text(
-        text = "- $skill",
-        modifier = modifier
-    )
+    Card(modifier = modifier.fillMaxHeight()){
+        // pour afficher la compété sous forme de liste en -
+        Text(
+            text = skill,
+            modifier = Modifier.padding(8.dp,4.dp),
+        )
+    }
 }
 
 // Zone cliquable de disponibilité (action + accessibilité)
