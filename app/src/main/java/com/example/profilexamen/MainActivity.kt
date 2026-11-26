@@ -16,6 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -41,20 +44,35 @@ class MainActivity : ComponentActivity() {
 // Écran principal
 @Composable
 fun ProfileScreen(modifier: Modifier = Modifier) {
-    ProfileCard(
-        name = "Julien Hédreul",
-        role = "Développeur Angular/React",
-        description = "Étudiant en développement informatique, je pratique le Typescript avec Angular",
-        skills = listOf("Kotlin", "Jetpack Compose", "Java", "JS","Angular","Symfony","ReactJS","Git"),
-        availability = "Disponinible pour une alternance de 2 ans",
-        onAvailabilityClick = {
-            // pas de fonctionnement
-        },
-        // padding externe : le parent place la carte dans l'écran
+    Column(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(24.dp)
-    )
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        ProfileCard(
+            name = "Julien Hédreul",
+            role = "Développeur Angular/React",
+            description = "Étudiant en développement informatique, je pratique le Typescript avec Angular",
+            skills = listOf(
+                "Kotlin",
+                "Jetpack Compose",
+                "Java",
+                "JS",
+                "Angular",
+                "Symfony",
+                "ReactJS",
+                "Git"
+            ),
+            availability = "Disponinible pour une alternance de 2 ans",
+            onAvailabilityClick = {
+                // pas de fonctionnement
+            },
+            // padding externe : le parent place la carte dans l'écran
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(24.dp)
+        )
+    }
 }
 
 // Fiche de profil
@@ -105,9 +123,31 @@ fun ProfileHeader(
     role: String,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
-        Text(text = name)
-        Text(text = role)
+    Box(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.large,
+            tonalElevation = 2.dp
+        ) {
+            Column(modifier = modifier) {
+                Text(text = name)
+            }
+        }
+        Surface(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(8.dp),
+            shape = MaterialTheme.shapes.small,
+            tonalElevation = 6.dp
+        ) {
+            Text(
+                text = role,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                style = MaterialTheme.typography.labelMedium
+            )
+        }
     }
 }
 
@@ -139,7 +179,7 @@ fun InteractionAvailability(
                 role = Role.Button,
                 onClick = onClick
             )
-            .semantics{
+            .semantics {
                 contentDescription = "Contacter : téléphone"
             }
     ) {
@@ -154,7 +194,7 @@ fun InteractionAvailability(
 @Preview(showBackground = true)
 @Composable
 fun ProfileJuniorPreview() {
-    ProfilExamenTheme(){
+    ProfilExamenTheme() {
         ProfileCard(
             name = "Jean Tanrien",
             role = "Dev junior",
@@ -178,7 +218,17 @@ fun ProfileFullStackPreview() {
             role = "Développeur Angular/React",
             description = "Étudiant en développement informatique à l'ESGI, je recherche une alternance de 2ans dans le dev web/applicatif. Auriez-vous des contacts ? Si mon profil vous intéresse, je serai heureux de pouvoir échanger avec vous ;)" +
                     "Mail: hedrjul@gmail.com (tout est vrai)",
-            skills = listOf("Angular", "JavaScript", "React", "MongoDB", "Symfony","SQL", "Git","PHP","Docker"),
+            skills = listOf(
+                "Angular",
+                "JavaScript",
+                "React",
+                "MongoDB",
+                "Symfony",
+                "SQL",
+                "Git",
+                "PHP",
+                "Docker"
+            ),
             availability = "Disponible dès maintenant",
             onAvailabilityClick = {},
             modifier = Modifier
