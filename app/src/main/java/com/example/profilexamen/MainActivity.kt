@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.expandHorizontally
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -196,7 +197,7 @@ fun ProfileImage(
     modifier: Modifier = Modifier
 ) {
     androidx.compose.foundation.Image(
-        painter = painterResource(id = android.R.drawable.ic_input_add),
+        painter = painterResource(id = android.R.drawable.ic_menu_gallery),
         contentDescription = "Image de profil de $profileTitle",
         modifier = modifier
     )
@@ -204,7 +205,8 @@ fun ProfileImage(
 @Composable
 fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier){
     LazyColumn(
-        modifier = modifier,
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(skills) { skill ->
@@ -218,7 +220,7 @@ fun SkillsColumn(skills: List<String>, modifier: Modifier = Modifier){
                 SkillItem(skill = skill)
             }
             *  */
-// Une compétence
+// Une compétence -> équivalent à SkillCard dans le pdf du Devoir
 @Composable
 fun SkillItem(
     skill: String,
